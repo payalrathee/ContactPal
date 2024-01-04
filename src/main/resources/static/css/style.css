@@ -1,0 +1,57 @@
+:root {
+	--primary-color: #003434;
+	--secondary-color: #66B2B2;
+	--hover-color: #008080;
+}
+
+/* Common css */
+.btn {
+	color: white;	
+}
+
+.btn:hover {
+	background-color: var(--hover-color);
+	color: white;
+}
+
+.cm-primary {
+	background-color: var(--primary-color);
+}
+
+.cm-err {
+	color: red;
+    background: #ffc0cb8c;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+}
+
+body{
+	margn: 0;
+	padding: 0;
+}
+
+/* Footer */
+#cm-footer {
+	background-color: black;
+	position: fixed;
+	bottom: 0px;
+	height: 50px;
+	width: 100%;
+}
+
+/* Home page */
+#cm-home-main {
+	height: 92vh;
+	width: 100%;
+	background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('../images/home.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: white;
+}
+
+/* Sign in/Sign up form */
+#cm-signin-form, #cm-signup-form {
+	width: 50%;
+	background: white;
+}

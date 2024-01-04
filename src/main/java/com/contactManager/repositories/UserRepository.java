@@ -6,4 +6,5 @@ import com.contactManager.models.User;
 
 public interface UserRepository extends JpaRepository<User,Integer>{
 
+	public User getUserByUsernameAndPassword(String username, String password);
 }

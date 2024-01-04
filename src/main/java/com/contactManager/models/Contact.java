@@ -6,6 +6,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -41,7 +42,7 @@ public class Contact {
 	private String note;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinTable( name="user")
+	@JoinColumn( name="user")
 	private User user;
 
 	public Contact() {

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th = " http://www.thymeleaf.org" th:replace = "base.html::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+<section>
+<h1 class="text-center mt-3">Register</h1>
+<form novalidate="novalidate" class="container mt-1" id="cm-signup-form" action="/register" method="post" th:object = "${user}">
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input type="text" th:value = "${user.username}" class="form-control" th:classAppend = "${#fields.hasErrors('username') ? 'is-invalid' : ''}" id="username" name="username" placeholder="Enter username" required>
+  	<div th:each = "e : ${#fields.errors('username')}" id="validationServerUsernameFeedback" class="invalid-feedback" th:text = "${e}"></div>
+  </div>
+  
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" th:value = "${user.password}" class="form-control" th:classAppend = "${#fields.hasErrors('password') ? 'is-invalid' : ''}" id="password" name="password" placeholder="Enter password" required>
+  	<div th:each = "e : ${#fields.errors('password')}" id="validationServerUsernameFeedback" class="invalid-feedback" th:text = "${e}"></div>
+  </div>  
+  
+  <div class="mb-3">
+    <label for="fname" class="form-label">First Name</label>
+    <input type="text" th:value = "${user.fname}" class="form-control" th:classAppend = "${#fields.hasErrors('fname') ? 'is-invalid' : ''}" id="fname" name="fname" placeholder="Enter first name">
+  	<div th:each = "e : ${#fields.errors('fname')}" id="validationServerUsernameFeedback" class="invalid-feedback" th:text = "${e}"></div>
+  </div>
+  
+  <div class="mb-3">
+    <label for="lname" class="form-label">Last Name</label>
+    <input type="text" th:value = "${user.lname}" class="form-control"th:classAppend = "${#fields.hasErrors('lname') ? 'is-invalid' : ''}" id="lname" name="lname" placeholder="Enter last name">
+  	<div th:each = "e : ${#fields.errors('lname')}" id="validationServerUsernameFeedback" class="invalid-feedback" th:text = "${e}"></div>
+  </div>
+  
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" th:value = "${user.email}" class="form-control" th:classAppend = "${#fields.hasErrors('email') ? 'is-invalid' : ''}" id="email" name="email" placeholder="Enter email" required>
+  	<div th:each = "e : ${#fields.errors('email')}" id="validationServerUsernameFeedback" class="invalid-feedback" th:text = "${e}"></div>
+  </div>
+  
+  <div class="mb-3">
+    <label for="phone" class="form-label">Contact</label>
+    <input type="phone" th:value = "${user.phone == 0 ? '' : user.phone}" class="form-control" th:classAppend = "${#fields.hasErrors('phone') ? 'is-invalid' : ''}" id="phone" name="phone" placeholder="Enter contact">
+  	<div th:each = "e : ${#fields.errors('phone')}" id="validationServerUsernameFeedback" class="invalid-feedback" th:text = "${e}"></div>
+  </div>
+  
+  <div class="text-center">
+  <button type="submit" class="btn cm-primary">Register</button>
+  </div>
+</form>
+</section>
+</body>
+</html>
