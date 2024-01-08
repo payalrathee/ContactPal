@@ -7,7 +7,7 @@
 <body>
 <section>
 <h1 class="text-center mt-3">Register</h1>
-<form novalidate="novalidate" class="container mt-1" id="cm-signup-form" action="/register" method="post" th:object = "${user}">
+<form class="container mt-1" id="cm-signup-form" th:action="@{/user/register}" method="post" th:object = "${user}">
   <div class="mb-3">
     <label for="username" class="form-label">Username</label>
     <input type="text" th:value = "${user.username}" class="form-control" th:classAppend = "${#fields.hasErrors('username') ? 'is-invalid' : ''}" id="username" name="username" placeholder="Enter username" required>

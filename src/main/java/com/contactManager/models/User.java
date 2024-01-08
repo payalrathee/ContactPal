@@ -1,8 +1,13 @@
 package com.contactManager.models;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -21,7 +26,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="user")
-public class User {
+public class User implements UserDetails{
 	
 	@Id
 	@Column(name="id")
@@ -61,8 +66,8 @@ public class User {
 	@Column(name="about")
 	private String about;
 	
-	@Column(name="status", nullable = false)
-	private boolean status;
+	@Column(name="active", nullable = false)
+	private boolean active;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
 	private Set<Contact> contacts;
@@ -84,7 +89,7 @@ public class User {
 		this.profileImg = profileImg;
 		this.userRole = userRole;
 		this.about = about;
-		this.status = status;
+		this.active = status;
 		this.contacts = contacts;
 	}
 
@@ -168,12 +173,12 @@ public class User {
 		this.about = about;
 	}
 
-	public boolean isStatus() {
-		return status;
+	public boolean isActive() {
+		return active;
 	}
 
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setActive(boolean status) {
+		this.active = status;
 	}
 
 	public Set<Contact> getContacts() {
@@ -188,9 +193,33 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", fname=" + fname + ", lname="
 				+ lname + ", email=" + email + ", phone=" + phone + ", profileImg=" + profileImg + ", userRole="
-				+ userRole + ", about=" + about + ", status=" + status + ", contacts=" + contacts + "]";
+				+ userRole + ", about=" + about + ", status=" + active + ", contacts=" + contacts + "]";
 	}
-	
-	
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// Asuming user has single role
+		return List.of(new SimpleGrantedAuthority(userRole));
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return active;
+	}
 	
 }

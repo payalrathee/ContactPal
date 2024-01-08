@@ -1,27 +1,47 @@
 package com.contactManager.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.contactManager.models.User;
 import com.contactManager.repositories.UserRepository;
-import com.contactManager.utilities.Utility;
-
 @Service
-public class UserService {
-
-	@Autowired
-	UserRepository userRepo;
+public class UserService implements UserDetailsService{
 	
-	public User registerUser(User user) {
+	@Autowired
+	private UserRepository userRepo;
+	
+	@Autowired
+	private PasswordEncoder encoder;
+	
+	public User registerUser(User user){
 		
 		// set additional info
 		user.setUserRole("ROLE_USER");
-		user.setStatus(true);
+		user.setActive(true);
 		
-		// save user in session
-		Utility.session().setAttribute("currentUser", user);
+		// encrypt password
+		user.setPassword(encoder.encode(user.getPassword()));
 		
-		return userRepo.save(user);
+		// save user
+		user = userRepo.save(user);
+		
+		return user;
 	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		UserDetails user = userRepo.getUserByUsername(username);
+		if(user == null) {
+			throw new UsernameNotFoundException(username);
+		}
+		
+		return user;
+	}
+
 }

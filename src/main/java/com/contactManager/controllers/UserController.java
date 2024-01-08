@@ -18,17 +18,14 @@ import jakarta.validation.Valid;
 
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 	
 	@RequestMapping(path="/register", method = RequestMethod.POST)
-	public String register(@Valid @ModelAttribute("user") User user, BindingResult result, HttpSession session, Model model) {
-		
-		if(session.getAttribute("currentUser") != null) {
-			return "redirect:/contacts";
-		}
+	public String register(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
 		
 		try {
 			
@@ -38,7 +35,7 @@ public class UserController {
 			
 			user = userService.registerUser(user);
 		
-			return "redirect:/contacts";
+			return "redirect:/signinPage";
 			
 		} catch(Exception e) {
 			
@@ -50,11 +47,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(path = "/contacts")
-	public String contacts(HttpSession session) {
-		
-		if(session.getAttribute("currentUser") == null) {
-			return "redirect:/signinPage";
-		}
+	public String contacts() {
 		
 		// modify model and add contacts
 		return "contacts";
