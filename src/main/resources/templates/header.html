@@ -7,17 +7,14 @@
 <body>
 <nav class="navbar navbar-expand-lg cm-primary" data-bs-theme="dark" th:fragment = "nav">
   <div class="container-fluid">
-    <a class="navbar-brand">Contact Manager</a>
+    <a class="navbar-brand" th:href="@{/}">ContactPal</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse ms-auto" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-      	<li class="nav-item">
-          <a class="nav-link" th:href="@{/}">Home</a>
-        </li>
         <li th:if = "${T(com.contactManager.utilities.Utility).isUserLoggedIn()}" class="nav-item">
-          <a class="nav-link" th:href="@{/user/contacts}">Contacts</a>
+          <a class="nav-link" th:href="@{/dashboard}">Dashboard</a>
         </li>
         <li th:if = "${T(com.contactManager.utilities.Utility).isUserLoggedIn() && T(com.contactManager.utilities.Utility).getCurrentUser().getUserRole == 'ROLE_ADMIN'}" class="nav-item">
           <a class="nav-link" th:href="@{/admin/}">Admin</a>
@@ -29,7 +26,7 @@
           <a class="nav-link" th:href="@{/signupPage}">Signup</a>
         </li>
         <li th:if = "${T(com.contactManager.utilities.Utility).isUserLoggedIn()}" class="nav-item">
-          <a class="nav-link" th:href="@{/logout}">Logout</a>
+          <a class="nav-link" th:href="@{/user/profile}"><img class="cm-profile-img" th:src="@{'/images/uploads/' + ${currUser.profileImg == null || currUser.profileImg == '' ? 'profile.jpg' : currUser.profileImg}}" /></a>
         </li>
       </ul>
     </div>

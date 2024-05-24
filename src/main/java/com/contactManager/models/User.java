@@ -54,7 +54,7 @@ public class User implements UserDetails{
 	private String email;
 	
 	@Pattern(regexp="(^$|[0-9]{10})", message = "Invalid phone number")
-	@Column(name="phone", unique=true, length=12)
+	@Column(name="phone", length=12)
 	private String phone;
 	
 	@Column(name="profile_image", columnDefinition="varchar(1000) default 'https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg'")
@@ -69,7 +69,7 @@ public class User implements UserDetails{
 	@Column(name="active", nullable = false)
 	private boolean active;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "user")
 	private Set<Contact> contacts;
 
 	public User() {

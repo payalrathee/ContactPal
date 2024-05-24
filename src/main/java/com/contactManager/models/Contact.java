@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="contact")
@@ -20,11 +21,13 @@ public class Contact {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
+	@NotBlank(message = "Name can't be empty")
 	@Column(name="name", nullable=false)
 	private String name;
 	
-	@Column(name = "phone", nullable = false, unique = true)
-	private long phone;
+	@NotBlank(message = "Phone can't be empty")
+	@Column(name = "phone", nullable = false)
+	private String phone;
 	
 	@Column(name = "nick_name")
 	private String nickName;
@@ -36,7 +39,7 @@ public class Contact {
 	private String email;
 	
 	@Column(name = "image")
-	private String imageUrl;
+	private String image;
 	
 	@Column(name = "note")
 	private String note;
@@ -49,7 +52,7 @@ public class Contact {
 		super();
 	}
 
-	public Contact(int id, String name, long phone, String nickName, String type, String email, String imageUrl,
+	public Contact(int id, String name, String phone, String nickName, String type, String email, String image,
 			String note, User user) {
 		super();
 		this.id = id;
@@ -58,7 +61,7 @@ public class Contact {
 		this.nickName = nickName;
 		this.type = type;
 		this.email = email;
-		this.imageUrl = imageUrl;
+		this.image = image;
 		this.note = note;
 		this.user = user;
 	}
@@ -79,11 +82,11 @@ public class Contact {
 		this.name = name;
 	}
 
-	public long getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(long phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -111,12 +114,12 @@ public class Contact {
 		this.email = email;
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
+	public String getImage() {
+		return image;
 	}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public String getNote() {
@@ -138,7 +141,7 @@ public class Contact {
 	@Override
 	public String toString() {
 		return "Contact [id=" + id + ", name=" + name + ", phone=" + phone + ", nickName=" + nickName + ", type=" + type
-				+ ", email=" + email + ", imageUrl=" + imageUrl + ", note=" + note + ", user=" + user + "]";
+				+ ", email=" + email + ", image=" + image + ", note=" + note + "]";
 	}
 
 }

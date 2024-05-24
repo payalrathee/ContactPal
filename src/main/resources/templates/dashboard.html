@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="userbase::layout(~{::section}, '')">
+<body>
+	<section>
+		<h1 class="text-center">ContactPal</h1>
+		<h3 class="text-center">Smart Contact Manager</h3>
+		<div class="cm-dashboard-wrapper">
+
+			<div class="cm-dashboard-item">
+				<img th:src="@{/images/tick.png}">
+				<p>Securely store and access your contacts from anywhere with our cloud-based contact manager.</p>
+			</div>
+			<div class="cm-dashboard-item">
+				<img th:src="@{/images/tick.png}">
+				<p>Easily update and manage your contacts with our user-friendly editing tools. Add images to your contacts.</p>
+			</div>
+			<div class="cm-dashboard-item">
+				<img th:src="@{/images/tick.png}">
+				<p>Keep important details at your fingertips by adding notes to each of your contacts.</p>
+			</div>
+
+		</div>
+		<script>
+			window.onload = function() {
+				var target = document.getElementById('cm-nav-home');
+				target.classList.add("active")
+
+			}
+		</script>
+	</section>
+</body>
+</html>

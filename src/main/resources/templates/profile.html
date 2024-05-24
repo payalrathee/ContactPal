@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="userbase::layout(~{::section}, '')">
+<body>
+	<section>
+		<div th:if = "${error}" th:text = "${error.msg}" class="cm-err mt-3 mb-3"></div>
+		<div class="cm-single-profile-wrapper" th:if="${currUser}">
+			<div class="cm-img-wrapper">
+				<img th:src="@{'/images/uploads/' + ${currUser.profileImg == null || currUser.profileImg == '' ? 'profile.jpg' : currUser.profileImg}}" />
+			</div>
+			<div class="cm-single-profile-name" th:text="'@' + ${currUser.username}"></div>
+			<table class="table cm-profiles-table">
+				<tbody>
+					<tr>
+						<th>First Name</th>
+						<td th:text="${currUser.fname}"></td>
+					</tr>
+					<tr>
+						<th>Last Name</th>
+						<td th:text="${currUser.lname}"></td>
+					</tr>
+					<tr>
+						<th>Email</th>
+						<td th:text="${currUser.email}"></td>
+					</tr>
+					<tr>
+						<th>Contact</th>
+						<td th:text="${currUser.phone}"></td>
+					</tr>
+					
+				</tbody>
+			</table>
+			<div th:if="${currUser.about != null && currUser.about != ''}" class="cm-single-profile-note" th:utext="${currUser.about}"></div>
+			<a th:href="@{'/user/updateForm'}" class="btn cm-primary">Update</a>
+			<div th:onclick="deleteUser()" class="btn btn-danger">Delete</div>
+		</div>
+		
+		<script>
+			window.onload = function() {
+				var target = document.getElementById('cm-nav-profile');
+				target.classList.add("active")
+				
+			}
+		</script>
+	</section>
+</body>
+</html>

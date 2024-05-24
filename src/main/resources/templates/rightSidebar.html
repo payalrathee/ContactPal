@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Contact Manager</title>
+</head>
+<body>
+	<section>
+		<div class="cm-sidebar-toggle-btn">
+			<i class="fa-solid fa-bars"></i>
+		</div>
+		<div class="cm-sidebar-wrapper">
+			<ul class="cm-sidebar-list">
+
+				<a id="cm-nav-home" th:href="@{/dashboard}"><li class="cm-sidebar-item"><i class="fa-solid fa-house"></i>Home</li></a>
+				<a id="cm-nav-view-contacts" th:href="@{/contact/all/0}"><li class="cm-sidebar-item"><i class="fa-solid fa-address-card"></i>View
+					Contacts</li></a>
+				<a id="cm-nav-add-contact" th:href="@{/contact/addForm}"><li class="cm-sidebar-item"><i class="fa-solid fa-plus"></i>Add
+					Contact</li></a>
+				<a id="cm-nav-profile" th:href="@{/user/profile}"><li class="cm-sidebar-item"><i class="fa-solid fa-user"></i>Your
+					Profile</li></a>
+				<a id="cm-nav-logout" th:href="@{/logout}"><li class="cm-sidebar-item"><i
+					class="fa-solid fa-right-from-bracket"></i>Logout</li></a>
+			</ul>
+		</div>
+	</section>
+</body>
+</html>

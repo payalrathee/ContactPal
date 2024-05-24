@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="userbase::layout(~{::section}, ${contact != null ? '#SCM2024' + contact.id : ''})">
+<body>
+	<section>
+		<div th:if = "${error}" th:text = "${error.msg}" class="cm-err mt-3 mb-3"></div>
+		<div class="cm-single-contact-wrapper" th:unless="${error}">
+			<div class="cm-img-wrapper">
+				<img th:src="@{'/images/uploads/' + ${contact.image == '' ? 'contact.png' : contact.image}}" />
+			</div>
+			<div class="cm-single-contact-name" th:text="${contact.name}"></div>
+			<table class="table cm-contacts-table">
+				<tbody>
+					<tr>
+						<th>Nickname</th>
+						<td th:text="${contact.nickName}"></td>
+					</tr>
+					<tr>
+						<th>Phone</th>
+						<td th:text="${contact.phone}"></td>
+					</tr>
+					<tr>
+						<th>Email</th>
+						<td th:text="${contact.email}"></td>
+					</tr>
+					<tr>
+						<th>Work</th>
+						<td th:text="${contact.type}"></td>
+					</tr>
+				</tbody>
+			</table>
+			<div th:if="${contact.note != ''}" class="cm-single-contact-note" th:utext="${contact.note}"></div>
+			<a th:href="@{'/contact/updateForm/' + ${contact.id}}" class="btn cm-primary">Update</a>
+			<div th:onclick="|deleteContact(${contact.id})|" class="btn btn-danger">Delete</div>
+		</div>
+	</section>
+</body>
+</html>

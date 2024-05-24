@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sf="http://www.springframework.org/tags/form"
+	th:replace="~{userBase::layout(~{::section}, '')}">
+<body>
+	<section>
+		<form method="post" th:action="@{/contact/add}" th:object="${contact}"
+			enctype="multipart/form-data">
+			<div class="cm-add-contact-wrapper">
+				<div class="cm-img">
+					<div class="cm-img-wrapper">
+						<img
+							th:src="@{'/images/uploads/' + ${contact.image != '' && contact.image != null ? contact.image : 'profile.jpg'}}" />
+					</div>
+					<input id="cm-contact-img" type="file" name="file">
+				</div>
+				<div class="cm-input-wrapper">
+					<input type="hidden" name="id" th:value="${contact.id}">
+				</div>
+				<div class="cm-input-wrapper">
+					<input type="hidden" name="image" th:value="${contact.image}">
+				</div>
+				<div class="cm-input-wrapper">
+					<div class="cm-input-icon">
+						<i class="fa-solid fa-user"></i>
+					</div>
+					<input type="text" name="name" class="cm-field"
+						placeholder="Enter name" th:value="${contact.name}">
+				</div>
+				<div th:each="e : ${#fields.errors('name')}" class="cm-warning"
+					th:text="${e}"></div>
+
+				<div class="cm-input-wrapper">
+					<div class="cm-input-icon">
+						<i class="fa-solid fa-signature"></i>
+					</div>
+					<input type="text" name="nickName" class="cm-field"
+						placeholder="Enter nick name" th:value="${contact.nickName}">
+				</div>
+				<div th:each="e : ${#fields.errors('nickName')}" class="cm-warning"
+					th:text="${e}"></div>
+
+				<div class="cm-input-wrapper">
+					<div class="cm-input-icon">
+						<i class="fa-solid fa-phone"></i>
+					</div>
+					<input type="tel" name="phone" class="cm-field"
+						placeholder="Enter phone" th:value="${contact.phone}">
+				</div>
+				<div th:each="e : ${#fields.errors('phone')}" class="cm-warning"
+					th:text="${e}"></div>
+
+				<div class="cm-input-wrapper">
+					<div class="cm-input-icon">
+						<i class="fa-solid fa-envelope"></i>
+					</div>
+					<input type="email" name="email" class="cm-field"
+						placeholder="Enter email" th:value="${contact.email}">
+				</div>
+				<div th:each="e : ${#fields.errors('email')}" class="cm-warning"
+					th:text="${e}"></div>
+
+				<div class="cm-input-wrapper">
+					<div class="cm-input-icon">
+						<i class="fa-solid fa-user-tie"></i>
+					</div>
+					<input type="text" name="type" class="cm-field"
+						placeholder="Enter work" th:value="${contact.type}">
+				</div>
+				<div th:each="e : ${#fields.errors('type')}" class="cm-warning"
+					th:text="${e}"></div>
+
+				<div class="cm-input-wrapper">
+					<textarea name="note" id="cm-contact-note"
+						class="cm-field cm-contact-desc" placeholder="Enter description"
+						th:value="${contact.note}" th:text="${contact.note}"></textarea>
+				</div>
+				<div th:each="e : ${#fields.errors('note')}" class="cm-warning"
+					th:text="${e}"></div>
+
+				<div class="cm-input-wrapper">
+					<input type="submit" value="Save" class="btn cm-primary">
+				</div>
+				<div th:if="${error}" class="cm-err" th:text="${error.msg}"></div>
+		</form>
+
+
+		<script
+			src="https://cdn.tiny.cloud/1/nho9ow4hp38n95p27e7vqryz4bogjdmaud4zppn994ruclf1/tinymce/7/tinymce.min.js"
+			referrerpolicy="origin"></script>
+
+		<script>
+			  tinymce.init({
+			    selector: '#cm-contact-note',
+			    plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+			    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+			    tinycomments_mode: 'embedded',
+			    tinycomments_author: 'Author name',
+			    mergetags_list: [
+			      { value: 'First.Name', title: 'First Name' },
+			      { value: 'Email', title: 'Email' },
+			    ],
+			    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+			  });
+
+				window.onload = function() {
+					var target = document.getElementById('cm-nav-add-contact');
+					target.classList.add("active")
+					
+				}
+		
+		</script>
+
+	</section>
+</body>
+</html>

@@ -7,7 +7,9 @@
 <body>
 <section>
 <h1 class="text-center mt-3">Register</h1>
-<form class="container mt-1" id="cm-signup-form" th:action="@{/user/register}" method="post" th:object = "${user}">
+<div th:if = "${error}" th:text = "${error.msg}" class="cm-err mt-3 mb-3"></div>
+<form class="container mt-3 p-3" id="cm-signup-form" th:action="@{/user/register}" method="post" th:object = "${user}">
+
   <div class="mb-3">
     <label for="username" class="form-label">Username</label>
     <input type="text" th:value = "${user.username}" class="form-control" th:classAppend = "${#fields.hasErrors('username') ? 'is-invalid' : ''}" id="username" name="username" placeholder="Enter username" required>

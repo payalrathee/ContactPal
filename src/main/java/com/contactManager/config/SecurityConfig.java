@@ -31,11 +31,12 @@ public class SecurityConfig{
                         .requestMatchers("/signinPage", "/signupPage", "/login", "/user/register").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/contact/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().permitAll()
                  )
                 .formLogin(form -> form
                         .loginPage("/signinPage")
-                        .successForwardUrl("/")
+                        .successForwardUrl("/dashboard")
                         .loginProcessingUrl("/login")
                         .failureUrl("/login-error")
                  )

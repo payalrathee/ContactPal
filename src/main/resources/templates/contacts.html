@@ -1,12 +1,55 @@
 <!DOCTYPE html>
-<html xmlns:th = "http://www.thymeleaf.org" th:replace = "base::layout(~{::section})">
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="userbase::layout(~{::section}, '')">
 <body>
-<section>
-<p th:text="${session.currentUser}"></p>
-</section>
+	<section>
+		<table class="table cm-contacts-table">
+			<thead>
+				<tr>
+					<th scope="col"></th>
+					<th scope="col">ID</th>
+					<th scope="col">Name</th>
+					<th scope="col">Phone</th>
+					<th scope="col">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="contact : ${contacts}">
+					<td><img
+						th:src="@{'/images/uploads/' + ${contact.image == '' ? 'profile.jpg' : contact.image}}" /></td>
+					<th th:text="${'SCM2024'  + contact.id}"></th>
+					<td><a th:href="@{'/contact/' + ${contact.id}}"
+						th:text="${contact.name}"></a></td>
+					<td th:text="${contact.phone}"></td>
+					<td><a th:href="@{'/contact/updateForm/' + ${contact.id}}"><i
+							class="fa-solid fa-pen-to-square"></i></a> <i
+						th:onclick="|deleteContact(${contact.id})|"
+						class="fa-solid fa-trash"></i></td>
+				</tr>
+			</tbody>
+		</table>
+		<nav th:if="${totalPages>1}" aria-label="Page navigation example"
+			class="cm-pgn-wrapper">
+			<ul class="pagination">
+				<li th:classappend="${curr == 0 ? 'disable' : ''}" class="page-item"><a
+					class="page-link" th:href="@{'/contact/all/' + ${curr-1}}">Previous</a></li>
+				<li th:each="i : ${#numbers.sequence(1, totalPages)}"
+					th:classappend="${curr + 1 == i ? 'active' : ''}" class="page-item"><a
+					class="page-link" th:href="@{'/contact/all/' + ${i-1}}"
+					th:text="${i}"></a></li>
+				<li th:classappend="${curr == totalPages-1 ? 'disable' : ''}"
+					class="page-item"><a class="page-link"
+					th:href="@{'/contact/all/' + ${curr+1}}">Next</a></li>
+			</ul>
+		</nav>
+
+		<script>
+			window.onload = function() {
+				var target = document.getElementById('cm-nav-view-contacts');
+				target.classList.add("active")
+
+			}
+		</script>
+	</section>
 </body>
 </html>
