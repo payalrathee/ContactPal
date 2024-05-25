@@ -34,7 +34,11 @@ public class UserController {
 	
 	@ModelAttribute("currUser")
 	public User user(Principal principal) {
-		 User user = (User) userService.loadUserByUsername(principal.getName());
+		 
+		User user = null;
+		 if(principal != null) {
+			 user = (User) userService.loadUserByUsername(principal.getName());
+		 }
 		 return user;
 	}
 	
@@ -42,7 +46,7 @@ public class UserController {
 	public String register(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
 		
 		try {
-			
+			System.out.println("here");
 			if(result.hasErrors()) { 
 				return "signup";
 			}
