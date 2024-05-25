@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sf="http://www.springframework.org/tags/form"
-	th:replace="~{userBase::layout(~{::section}, '')}">
+	th:replace="~{userBase.html::layout(~{::section}, '')}">
 <body>
 	<section>
 		<form method="post" th:action="@{/user/update}" th:object="${currUser}"
