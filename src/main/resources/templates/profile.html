@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{userbase.html::layout(~{::section}, '')}">
+	th:replace="~{userBase.html::layout(~{::section}, '')}">
 <body>
 	<section>
 		<div th:if = "${error}" th:text = "${error.msg}" class="cm-err mt-3 mb-3"></div>

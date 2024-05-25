@@ -18,7 +18,7 @@
 </head>
 <body>
 
-	<div th:replace="header.html::nav"></div>
+	<div th:replace="~{header.html::nav}"></div>
 	<div th:replace="${content}"></div>
 
 	<script
